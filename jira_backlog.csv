@@ -1,21 +1,16 @@
-Issue Type,Summary,Description,Priority,Component/s
-Epic,Cadrage & Préparation Initiale,"Jour 1: Cadrage, documentation technique et backlog des tâches.",High,Documentation
-Story,Rédaction du README initial,"Rédiger le fichier README.md décrivant le projet, l'architecture SPA et les protocoles de jeu.",High,Documentation
-Story,Configuration du dépôt et arborescence,"Mettre en place la structure du projet (index.html, styles/, scripts/) et versionner sur Git.",Medium,Architecture
-Epic,Structure SPA & Prototype Jouable,"Jour 2: Intégration des 5 vues et première boucle de jeu jouable en mode classique.",High,Core Game
-Story,Intégration du Layout SPA et des 5 vues,"Créer les conteneurs HTML #view-home, #view-config, #view-game, #view-results, #view-history avec gestion des états d'affichage.",High,UI/UX
-Story,Arène de jeu et dimensionnement dynamique,"Mettre en place l'arène 500x500 px et la logique de génération aléatoire des coordonnées de la cible.",High,Core Game
-Story,Boucle de jeu Classique (10s),"Implémenter le chronométrage absolu via performance.now, incrémentation du score et déplacement de cible.",High,Core Game
-Epic,Paramétrage Avancé & Mode Précision,"Jour 3: Validation du formulaire de configuration, gestion des difficultés et mode précision.",High,Game Logic
-Story,Validation et sécurisation du formulaire,"Valider le pseudo (2-20 caractères, trim, neutralisation XSS via textContent) et les sélecteurs pills.",High,UI/UX
-Story,Implémentation des modes et difficultés,"Intégrer les tailles de cibles (80px, 60px, 40px) et durées (10s, 20s, 30s).",Medium,Game Logic
-Story,Logique du Mode Précision & Télémétrie HUD,"Compteur de tirs ratés, calcul de précision P(H,M) = (H / (H + M)) * 100 arrondi à 1 décimale, et affichage HUD.",High,Game Logic
-Epic,Persistance & Gestion des Données,"Jour 4: Gestion robuste du LocalStorage, records segmentés et historique circulaire.",High,Storage
-Story,Persistance des réglages et records composites,"Enregistrer les settings et les records avec clés composites [mode]_[diff]_[dur] avec état de repli en cas d'erreur.",High,Storage
-Story,Historique FIFO borné à 20 sessions,"Créer le registre glissant des 20 dernières sessions avec éviction de la plus ancienne.",High,Storage
-Story,Interface d'historique (Tris et Filtres),"Permettre le filtrage par mode, les tris comparatifs et la purge sécurisée de l'historique.",Medium,UI/UX
-Epic,Finitions, Accessibilité & Déploiement,"Jour 5: Responsive mobile, accessibilité WCAG, audit et mise en ligne.",Medium,Deployment
-Story,Responsive Design & Contraintes Mobiles,"Adapter l'arène et l'interface jusqu'à 360 px sans débordement.",Medium,UI/UX
-Story,Audit Accessibilité (WCAG) & Qualité,"Vérifier les contrastes, la navigation clavier, et neutraliser tout rechargement de page intempestif.",Low,UI/UX
-Story,Déploiement en ligne et tests finaux,"Déployer le projet sur GitHub Pages et valider les critères d'acceptation.",High,Deployment
-Story,Extension: Mode Défi (Bonus),"Déplacement autonome de la cible après 1.0 seconde sans clic réussi et réarmement.",Low,Bonus
+Issue Type,Summary,Description
+Task,J1 - Documentation technique et cadrage (README.md),Rediger le README complet du projet Click Fast: architecture SPA regles metier formules et schema LocalStorage
+Task,J1 - Configuration du depot Git et arborescence,Initialiser le depot Git avec structure index.html dossiers css js assets et premier commit
+Task,J2 - Integration des 5 vues SPA en HTML et CSS,Integrer les conteneurs view-home view-config view-game view-results et view-history avec bascule d affichage
+Task,J2 - Conception de l arene 500x500 et dimensionnement cible,Creer l arene 500x500 px et la logique de placement aleatoire strict de la cible
+Task,J2 - Boucle de jeu Classique 10s et compteur de score,Implementer le decompte deterministe avec performance.now incrementation du score et translation cible
+Task,J3 - Validation stricte du formulaire de configuration,Valider le pseudo entre 2 et 20 caracteres avec trim et textContent selection du mode duree et difficulte
+Task,J3 - Implementation du Mode Precision et calcul P(H M),Detecter les clics rates dans l arene et calculer le taux officiel de precision arrondi a une decimale
+Task,J3 - Machine a etats et verrouillage de session,Bloquer les acces aux autres vues durant la partie pour preserver l integrite temporelle
+Task,J4 - Persistance LocalStorage et Records composites,Sauvegarder clickFast.settings et gerer clickFast.records partitionne par mode_diff_dur
+Task,J4 - Historique FIFO circulaire limite a 20 sessions,Enregistrer les parties dans clickFast.history avec eviction de la plus ancienne au-dela de 20
+Task,J4 - Filtres tris et purge securisee de l historique,Permettre le tri chronologique le filtrage par mode et la suppression controlee des donnees
+Task,J4 - Extension Mode Defi avec rearmement 1s,Implementer le deplacement automatique de la cible a 1.0 seconde sans alteration du score
+Task,J5 - Audit accessibilite WCAG et navigation clavier,Verifier contrastes ratios focus visible navigation au clavier et conformite balises
+Task,J5 - Tests de compatibilite responsive 360px,Adapter l arene et les composants d interface jusqu a une largeur d ecran mobile de 360px
+Task,J5 - Recette fonctionnelle finale et deploie GitHub Pages,Executer les tests de controle deployer l application sur GitHub Pages et livrer le depot

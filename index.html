@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Click Fast!</title>
+    <link rel="stylesheet" href="css.css">
+</head>
+
+<body>
+    <!-- ===== APP ===== -->
+    <div id="app">
+        <div class="card" id="appCard">
+
+            <!-- ===== VIEW: HOME ===== -->
+            <div id="view-home" class="view active">
+                <div class="home-title">
+                    Click <span class="accent">Fast!</span>
+                </div>
+                <div class="home-sub">Testez vos réflexes et votre précision</div>
+
+                <div class="home-rules">
+                    <strong>⚡ Règles</strong><br />
+                    Cliquez sur la cible le plus vite possible.<br />
+                    Chaque clic réussi fait apparaître la cible ailleurs.<br />
+                    <span class="text-muted" style="font-size:.8rem;">Mode Précision : les tirs ratés sont
+                        comptabilisés.<br />Mode Défi : la cible se déplace toute seule si vous tardeztrop.</span>
+                </div>
+
+                <div class="home-record" id="homeRecord">
+                    <span class="label">🏆 Meilleur score (Classique • Moyenne • 10s)</span>
+                    <span class="value" id="homeRecordValue">—</span>
+                </div>
+
+                <div class="home-actions">
+                    <button class="btn btn-primary" data-nav="config" onclick="">Nouvelle partie</button>
+                    <button class="btn btn-outline" data-nav="history">Historique</button>
+                </div>
+                <div style="margin-top:12px;text-align:center;font-size:.7rem;color:var(--textDim);">
+                    Nova Arcade Studio &bull; YouCode 2026
+                </div>
+            </div>
+
+            <!-- ===== VIEW: CONFIG ===== -->
+            <div id="view-config" class="view">
+                <h2>⚙️ Configuration</h2>
+
+                <div class="config-group">
+                    <label for="cfgPseudo">Pseudo</label>
+                    <input type="text" id="cfgPseudo" placeholder="Votre pseudo (2–20 caractères)" maxlength="20"
+                        autocomplete="off" />
+                </div>
+
+                <div class="config-row">
+                    <div class="config-group">
+                        <label>Mode</label>
+                        <div class="pills" id="cfgMode">
+                            <span class="pill active" data-value="Classique">Classique</span>
+                            <span class="pill" data-value="Précision">Précision</span>
+                            <span class="pill" data-value="Défi">Défi</span>
+                        </div>
+                    </div>
+                    <div class="config-group">
+                        <label>Durée</label>
+                        <div class="pills" id="cfgDuration">
+                            <span class="pill" data-value="10">10s</span>
+                            <span class="pill active" data-value="20">20s</span>
+                            <span class="pill" data-value="30">30s</span>
+                        </div>
+                    </div>
+                    <div class="config-group">
+                        <label>Difficulté</label>
+                        <div class="pills" id="cfgDifficulty">
+                            <span class="pill" data-value="Facile">Facile</span>
+                            <span class="pill active" data-value="Moyenne">Moyenne</span>
+                            <span class="pill" data-value="Difficile">Difficile</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="config-actions">
+                    <button class="btn btn-outline" data-nav="home">Retour</button>
+                    <button class="btn btn-primary" id="btnStart">Lancer la partie</button>
+                </div>
+            </div>
+
+            <!-- ===== VIEW: GAME ===== -->
+            <div id="view-game" class="view">
+                <div class="game-hud" id="gameHud">
+                    <span class="hud-item">
+                        <span class="hud-label">⏱</span>
+                        <span class="hud-value danger" id="hudTime">20</span><span class="hud-label">s</span>
+                    </span>
+                    <span class="hud-item">
+                        <span class="hud-label">🎯 Score</span>
+                        <span class="hud-value accent" id="hudScore">0</span>
+                    </span>
+                    <span class="hud-item">
+                        <span class="hud-label">🏆 Record</span>
+                        <span class="hud-value" id="hudRecord">0</span>
+                    </span>
+                    <span class="hud-item hidden" id="hudMissesWrap">
+                        <span class="hud-label">❌ Ratés</span>
+                        <span class="hud-value danger" id="hudMisses">0</span>
+                    </span>
+                    <span class="hud-item hidden" id="hudAccWrap">
+                        <span class="hud-label">🎯 Précision</span>
+                        <span class="hud-value success" id="hudAcc">100%</span>
+                    </span>
+                </div>
+
+                <div class="arena-wrapper" id="arenaWrapper">
+                    <canvas id="arenaCanvas" width="500" height="500"></canvas>
+                </div>
+
+                <div class="game-status" id="gameStatus">
+                    Cliquez sur la cible !
+                </div>
+            </div>
+
+            <!-- ===== VIEW: RESULTS ===== -->
+            <div id="view-results" class="view">
+                <h2 class="text-center">🏁 Partie terminée</h2>
+
+                <div class="results-score">
+                    <div class="label">Votre score</div>
+                    <div class="big" id="resultScore">0</div>
+                </div>
+
+                <div id="resultRecordBroken" class="results-record-broken hidden">
+                    🎉 Nouveau record !
+                </div>
+
+                <div class="results-stats">
+                    <div class="stat">
+                        <div class="num gold" id="resultScoreStat">0</div>
+                        <div class="desc">Score</div>
+                    </div>
+                    <div class="stat">
+                        <div class="num" id="resultModeStat" style="font-size:1rem;font-weight:600;">Classique</div>
+                        <div class="desc">Mode</div>
+                    </div>
+                    <div class="stat">
+                        <div class="num green" id="resultAccStat">—</div>
+                        <div class="desc">Précision</div>
+                    </div>
+                    <div class="stat">
+                        <div class="num red" id="resultMissesStat">—</div>
+                        <div class="desc">Ratés</div>
+                    </div>
+                </div>
+
+                <div class="results-actions">
+                    <button class="btn btn-primary" id="btnReplay">🔁 Rejouer</button>
+                    <button class="btn btn-outline" data-nav="home">🏠 Accueil</button>
+                    <button class="btn btn-outline" data-nav="history">📋 Historique</button>
+                </div>
+            </div>
+
+            <!-- ===== VIEW: HISTORY ===== -->
+            <div id="view-history" class="view">
+                <div class="flex-between wrap" style="margin-bottom:8px;">
+                    <h2 style="margin:0;">📋 Historique</h2>
+                    <button class="btn btn-sm btn-outline" data-nav="home">Retour</button>
+                </div>
+
+                <div class="history-toolbar">
+                    <span class="text-muted" style="font-size:.8rem;">Filtrer :</span>
+                    <span class="pill active" data-filter="all">Tous</span>
+                    <span class="pill" data-filter="Classique">Classique</span>
+                    <span class="pill" data-filter="Précision">Précision</span>
+                    <span class="pill" data-filter="Défi">Défi</span>
+                    <span style="flex:1;"></span>
+                    <button class="btn btn-sm btn-danger" id="btnClearHistory">🗑 Effacer</button>
+                </div>
+
+                <div class="history-list" id="historyList">
+                    <div class="history-empty">Aucune session enregistrée.</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ===== JAVASCRIPT ===== -->
+     <script src="script.js"></script>
+</body>
+
+</html>
