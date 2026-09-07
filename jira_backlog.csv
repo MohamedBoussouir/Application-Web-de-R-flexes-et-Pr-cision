@@ -1,0 +1,21 @@
+Issue Type,Summary,Description,Priority,Component/s
+Epic,Cadrage & Préparation Initiale,"Jour 1: Cadrage, documentation technique et backlog des tâches.",High,Documentation
+Story,Rédaction du README initial,"Rédiger le fichier README.md décrivant le projet, l'architecture SPA et les protocoles de jeu.",High,Documentation
+Story,Configuration du dépôt et arborescence,"Mettre en place la structure du projet (index.html, styles/, scripts/) et versionner sur Git.",Medium,Architecture
+Epic,Structure SPA & Prototype Jouable,"Jour 2: Intégration des 5 vues et première boucle de jeu jouable en mode classique.",High,Core Game
+Story,Intégration du Layout SPA et des 5 vues,"Créer les conteneurs HTML #view-home, #view-config, #view-game, #view-results, #view-history avec gestion des états d'affichage.",High,UI/UX
+Story,Arène de jeu et dimensionnement dynamique,"Mettre en place l'arène 500x500 px et la logique de génération aléatoire des coordonnées de la cible.",High,Core Game
+Story,Boucle de jeu Classique (10s),"Implémenter le chronométrage absolu via performance.now, incrémentation du score et déplacement de cible.",High,Core Game
+Epic,Paramétrage Avancé & Mode Précision,"Jour 3: Validation du formulaire de configuration, gestion des difficultés et mode précision.",High,Game Logic
+Story,Validation et sécurisation du formulaire,"Valider le pseudo (2-20 caractères, trim, neutralisation XSS via textContent) et les sélecteurs pills.",High,UI/UX
+Story,Implémentation des modes et difficultés,"Intégrer les tailles de cibles (80px, 60px, 40px) et durées (10s, 20s, 30s).",Medium,Game Logic
+Story,Logique du Mode Précision & Télémétrie HUD,"Compteur de tirs ratés, calcul de précision P(H,M) = (H / (H + M)) * 100 arrondi à 1 décimale, et affichage HUD.",High,Game Logic
+Epic,Persistance & Gestion des Données,"Jour 4: Gestion robuste du LocalStorage, records segmentés et historique circulaire.",High,Storage
+Story,Persistance des réglages et records composites,"Enregistrer les settings et les records avec clés composites [mode]_[diff]_[dur] avec état de repli en cas d'erreur.",High,Storage
+Story,Historique FIFO borné à 20 sessions,"Créer le registre glissant des 20 dernières sessions avec éviction de la plus ancienne.",High,Storage
+Story,Interface d'historique (Tris et Filtres),"Permettre le filtrage par mode, les tris comparatifs et la purge sécurisée de l'historique.",Medium,UI/UX
+Epic,Finitions, Accessibilité & Déploiement,"Jour 5: Responsive mobile, accessibilité WCAG, audit et mise en ligne.",Medium,Deployment
+Story,Responsive Design & Contraintes Mobiles,"Adapter l'arène et l'interface jusqu'à 360 px sans débordement.",Medium,UI/UX
+Story,Audit Accessibilité (WCAG) & Qualité,"Vérifier les contrastes, la navigation clavier, et neutraliser tout rechargement de page intempestif.",Low,UI/UX
+Story,Déploiement en ligne et tests finaux,"Déployer le projet sur GitHub Pages et valider les critères d'acceptation.",High,Deployment
+Story,Extension: Mode Défi (Bonus),"Déplacement autonome de la cible après 1.0 seconde sans clic réussi et réarmement.",Low,Bonus
