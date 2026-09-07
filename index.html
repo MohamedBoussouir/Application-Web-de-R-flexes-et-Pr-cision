@@ -34,8 +34,9 @@
                 </div>
 
                 <div class="home-actions">
-                    <button class="btn btn-primary" data-nav="config" onclick="Nouvelle_partie()">Nouvelle partie</button>
-                    <button class="btn btn-outline" data-nav="history">Historique</button>
+                    <button class="btn btn-primary" data-nav="config" onclick="Nouvelle_partie()">Nouvelle
+                        partie</button>
+                    <button class="btn btn-outline" data-nav="history" onclick="HISTORY()">Historique</button>
                 </div>
                 <div style="margin-top:12px;text-align:center;font-size:.7rem;color:var(--textDim);">
                     Nova Arcade Studio &bull; YouCode 2026
@@ -56,32 +57,32 @@
                     <div class="config-group">
                         <label>Mode</label>
                         <div class="pills" id="cfgMode">
-                            <span class="pill active" data-value="Classique">Classique</span>
-                            <span class="pill" data-value="Précision">Précision</span>
-                            <span class="pill" data-value="Défi">Défi</span>
+                            <span class="pill active" data-value="Classique" onclick="selectPill(this)">Classique</span>
+                            <span class="pill" data-value="Précision" onclick="selectPill(this)">Précision</span>
+                            <span class="pill" data-value="Défi" onclick="selectPill(this)">Défi</span>
                         </div>
                     </div>
                     <div class="config-group">
                         <label>Durée</label>
                         <div class="pills" id="cfgDuration">
-                            <span class="pill" data-value="10">10s</span>
-                            <span class="pill active" data-value="20">20s</span>
-                            <span class="pill" data-value="30">30s</span>
+                            <span class="pill" data-value="10" onclick="selectPill(this)">10s</span>
+                            <span class="pill active" data-value="20" onclick="selectPill(this)">20s</span>
+                            <span class="pill" data-value="30" onclick="selectPill(this)">30s</span>
                         </div>
                     </div>
                     <div class="config-group">
                         <label>Difficulté</label>
                         <div class="pills" id="cfgDifficulty">
-                            <span class="pill" data-value="Facile">Facile</span>
-                            <span class="pill active" data-value="Moyenne">Moyenne</span>
-                            <span class="pill" data-value="Difficile">Difficile</span>
+                            <span class="pill" data-value="Facile" onclick="selectPill(this)">Facile</span>
+                            <span class="pill active" data-value="Moyenne" onclick="selectPill(this)">Moyenne</span>
+                            <span class="pill" data-value="Difficile" onclick="selectPill(this)">Difficile</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="config-actions">
                     <button class="btn btn-outline" data-nav="home" onclick="Nouvelle()">Retour</button>
-                    <button class="btn btn-primary" id="btnStart">Lancer la partie</button>
+                    <button class="btn btn-primary" id="btnStart" onclick="Lancer_la_partie()">Lancer la partie</button>
                 </div>
             </div>
 
@@ -162,7 +163,7 @@
             <div id="view-history" class="view">
                 <div class="flex-between wrap" style="margin-bottom:8px;">
                     <h2 style="margin:0;">📋 Historique</h2>
-                    <button class="btn btn-sm btn-outline" data-nav="home">Retour</button>
+                    <button class="btn btn-sm btn-outline" data-nav="home" onclick="Nouvelle()">Retour</button>
                 </div>
 
                 <div class="history-toolbar">
@@ -185,7 +186,7 @@
 
     <!-- ============================================================ -->
     <!-- ===== JAVASCRIPT ===== -->
-     <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
