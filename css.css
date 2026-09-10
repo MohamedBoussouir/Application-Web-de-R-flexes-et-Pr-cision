@@ -678,3 +678,89 @@
         .gap-4 {
             gap: 4px;
         }
+
+        /* الحاوية الرئيسية */
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 450px;
+    margin: 0 auto;
+    direction: rtl;
+    font-family: system-ui, sans-serif;
+}
+
+/* بطاقة الجولة */
+.history-card {
+    background: #1e1e24;
+    border: 1px solid #2e2e38;
+    border-radius: 12px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.history-card:hover {
+    transform: translateY(-2px);
+    border-color: #4f46e5;
+}
+
+/* شريط العنوان داخل البطاقة */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mode-badge {
+    background: #312e81;
+    color: #a5b4fc;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+}
+
+.date {
+    color: #9ca3af;
+    font-size: 0.8rem;
+}
+
+/* شبكة الإحصائيات */
+.card-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    background: #141418;
+    border-radius: 8px;
+    padding: 8px;
+    text-align: center;
+}
+
+.stat-box {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.stat-box .label {
+    font-size: 0.75rem;
+    color: #6b7280;
+}
+
+.stat-box .value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #f3f4f6;
+}
+
+.score-val {
+    color: #10b981 !important; /* أخضر بارز للسكور */
+}
+
+.miss-val {
+    color: #ef4444 !important; /* أحمر للأخطاء */
+}
