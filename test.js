@@ -1,23 +1,54 @@
-function showResults(pseudo, finalScore, finalMisses, duration) {
-  view_game.classList.add("hidden");
-  view_results.classList.remove("hidden");
+const { Worker, isMainThread, parentPort, workerData } = require("worker_threads");
 
-  let totalClicks = finalScore + finalMisses;
-  let accuracy = totalClicks > 0 ;
+if (isMainThread) {
+  console.time("12-Threads-Time");
 
-  document.getElementById("res-player").textContent = pseudo;
-  document.getElementById("res-score").textContent = finalScore;
-  document.getElementById("res-misses").textContent = finalMisses;
-  document.getElementById("res-accuracy").textContent = ${accuracy}%;
-  document.getElementById("res-time").textContent = ${duration}s;
+  const totalLimit = 40_000_000;
+  const numThreads = 12; // استغلال 12 مسار بالكامل
+  const chunkSize = Math.floor(totalLimit / numThreads);
+
+  let completedWorkers = 0;
+  let totalPrimes = 0;
+
+  function createWorker(start, end) {
+    const worker = new Worker(__filename, { workerData: { start, end } });
+
+    worker.on("message", (count) => {
+      totalPrimes += count;
+      completedWorkers++;
+
+      if (completedWorkers === numThreads) {
+        console.timeEnd("12-Threads-Time");
+        console.log(`تم العثور على: ${totalPrimes} عدد أولي`);
+      }
+    });
+  }
+
+  for (let i = 0; i < numThreads; i++) {
+    const start = i === 0 ? 2 : i * chunkSize + 1;
+    const end = (i === numThreads - 1) ? totalLimit : (i + 1) * chunkSize;
+    createWorker(start, end);
+  }
+
+} else {
+  const { start, end } = workerData;
+  let count = 0;
+
+  for (let i = start; i <= end; i++) {
+    let isPrime = true;
+    const max = Math.floor(Math.sqrt(i));
+
+    for (let j = 2; j <= max; j++) {
+      if (i % j === 0) {
+        isPrime = false;
+        break;
+      }
+    }
+
+    if (isPrime) {
+      count++;
+    }
+  }
+
+  parentPort.postMessage(count);
 }
-
-btn_results_home.addEventListener("click", () => {
-  view_results.classList.add("hidden");
-  view_home.classList.remove("hidden");
-});
-
-btn_replay.addEventListener("click", () => {
-  view_results.classList.add("hidden");
-  view_config.classList.remove("hidden");
-});

@@ -266,7 +266,6 @@ function appCard(Mode, Duree, Difficulte) {
     // ----------------------------------------------------------------------------------------------------------Défi
     if (Mode == "Défi") {
 
-
         let Rates = 0
         let Precision = 0
         score = 0;
@@ -279,6 +278,7 @@ function appCard(Mode, Duree, Difficulte) {
         let radius = 30;
         if (Difficulte === 'Facile') radius = 40;
         if (Difficulte === 'Difficile') radius = 20;
+        // drawTarget_duree(radius)
 
         let targetX = 0;
         let targetY = 0;
@@ -321,7 +321,7 @@ function appCard(Mode, Duree, Difficulte) {
                 score = score + 3;
                 Precision++;
                 document.getElementById('hudScore').innerText = score;
-                drawTarget();
+                // drawTarget();
             } else if (distance > radius) {
                 const Precision_1 = Math.hypot(0 - targetX, 0 - targetY);
                 const Precision_2 = Math.hypot(500 - targetX, 500 - targetY);
@@ -334,19 +334,22 @@ function appCard(Mode, Duree, Difficulte) {
                     score = score - 1;
                     Rates++;
                     document.getElementById('hudScore').innerText = score;
-                    drawTarget();
+                    drawTarget_duree(radius)
+
 
                 } else if (distance > (max / 3) || distance <= ((max / 3) * 2)) {
                     score = score - 2;
                     Rates++;
                     document.getElementById('hudScore').innerText = score;
-                    drawTarget();
+                    drawTarget_duree(radius)
+
 
                 } else if (distance > ((max / 3) * 2)) {
                     score = score - 3;
                     Rates++;
                     document.getElementById('hudScore').innerText = score;
-                    drawTarget();
+                    drawTarget_duree(radius)
+
 
                 }
 
@@ -354,14 +357,12 @@ function appCard(Mode, Duree, Difficulte) {
             return
         };
         for (let i = Duree; i >= 0; i--) {
-
+            // drawTarget_duree(radius)
             setTimeout(() => {
                 let hudTime = document.getElementById('hudTime');
                 hudTime.innerText = i;
 
-
                 if (i === 0) {
-
                     ctx.clearRect(0, 0, canvas.width, canvas.height);
                     canvas.onclick = null;
 
@@ -375,7 +376,7 @@ function appCard(Mode, Duree, Difficulte) {
                     Historique()
                     Historique_rander()
                 }
-                drawTarget()
+                // drawTarget_duree(radius)
             }, (Duree - i) * 1000);
 
         }
@@ -383,6 +384,30 @@ function appCard(Mode, Duree, Difficulte) {
     }
 }
 
+
+function drawTarget_duree(radius) {
+    console.log(10);
+    
+    const canvas = document.getElementById('arenaCanvas');
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const min = radius + 10;
+    const max = canvas.width - radius - 10;
+    targetX = Math.floor(Math.random() * (max - min)) + min;
+    targetY = Math.floor(Math.random() * (max - min)) + min;
+
+    ctx.beginPath();
+    ctx.arc(targetX, targetY, radius, 0, Math.PI * 2);
+    ctx.fillStyle = '#f7b731';
+    ctx.shadowColor = 'rgba(247, 183, 49, 0.4)';
+    ctx.shadowBlur = 15;
+    ctx.fill();
+    ctx.closePath();
+
+    setTimeout(() => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }, 1000);
+}
 
 function Historique() {
     let resultScore = document.getElementById('resultScore').innerText;
@@ -432,7 +457,7 @@ function Historique_rander() {
     }
     historyArray.forEach((item) => {
         let itemDiv = document.createElement('div');
-        itemDiv.className = 'history-item'; 
+        itemDiv.className = 'history-item';
         itemDiv.innerHTML = `
     <div class="card-header">
         <span class="mode-badge">${item.resultModeStat}</span>
